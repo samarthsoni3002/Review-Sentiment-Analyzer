@@ -1,43 +1,28 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrap_reviews(url):
-    proxies = {
-        'http': 'http://103.105.196.176:80',
-        'https': 'http://35.72.118.126:80'
-    }
-
-
-
-    review_list = []
-
-    review_url = url.replace("dp","product-reviews")
-
-    print(review_url)
-
-    response = requests.get(review_url,proxies=proxies, verify=False)
-
-    print(response.status_code)
-
-    soup = BeautifulSoup(response.text, "html.parser")
-
-    if response.status_code == 200:
-        
-        reviews = soup.findAll('div', {'data-hook':'review'})
-        
-
-        
-        
-        if reviews:
-            for item in reviews:
-                review_text = item.find("span", {"data-hook": "review-body"})
-                if review_text:
-                    review_list.append(review_text.text.strip())
+def scrape_amazon_reviews(url):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
     
-    return review_list
+    all_reviews = []
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        reviews = soup.find_all('div', {'data-hook': 'review'})
+        
+        for review in reviews:
+            
+            review_text = review.find('span', {'data-hook': 'review-body'}).text.strip()
+            all_reviews.append(review_text)
+            
+    
+    else:
+        print("Failed to fetch page")
+
+    return all_reviews
 
 
 
-url = 'https://www.amazon.in/Monitoring-Suitable-appliances-Geysers-Assistant/dp/B0BRQCJ57Y?ref_=Oct_DLandingS_D_9ad57e8d_0&th=1'
-reviews = scrap_reviews(url)
-print(reviews)
