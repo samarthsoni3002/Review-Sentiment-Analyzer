@@ -14,30 +14,38 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.container .brand {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.heading {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 30px;
+  color: #000000;
+  font-size: 32px;
 }
 
 .form-container {
-  margin-bottom: 20px;
+  text-align: center;
 }
 
 textarea {
   width: 100%;
-  height: 150px;
+  height: 200px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none;
   font-size: 16px;
+  margin-bottom: 10px;
 }
 
-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
+.submit-btn {
+  display: inline-block;
+  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -47,13 +55,20 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.submit-btn:hover {
   background-color: #0056b3;
 }
 
-.prediction-result {
-  text-align: center;
-  font-size: 20px;
+.brand {
+  font-size: 24px;
   font-weight: bold;
-  color: #333;
+  text-align: center; /* Center the heading */
+  padding: 0; /* Remove left padding */
+  margin: 0; /* Remove default margin */
+}
+
+.navbar {
+  background-color: #333;
+  color: #000000;
+  padding: 10px 0; /* Adjust top and bottom padding */
 }
